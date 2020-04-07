@@ -1,6 +1,8 @@
 #!/bin/bash
 
+echo "----------------------------------------"
 echo "Script para configuración de un ambiente LEMP (Linux, Nginx, MySQL, PHP) en Ubuntu y diferentes tools"
+echo "----------------------------------------"
 
 echo "1- Linux Updates y PPAS"
 echo "2- Linux Tools (git, unzip, zip)"
@@ -13,11 +15,15 @@ echo "8- Redis"
 echo "9- JS Tools (NodeJS, NPM, Gulp, Bower, Yarn, Grunt)"
 echo "10- Certbot (Let's Encrypt)"
 
+echo "----------------------------------------"
 read -p "Continuar? (y/n): " CONTINUE
+echo "----------------------------------------"
 
 if [ $CONTINUE = "y" ]; then
 
+    echo "----------------------------------------"
     read -p "Actualizar Ubuntu? (y/n): " UBUNTU
+    echo "----------------------------------------"
     if [ $UBUNTU = "y" ]; then
         echo "Actualizando"
         sudo apt -y update
@@ -30,13 +36,17 @@ if [ $CONTINUE = "y" ]; then
         sudo ln -sf /usr/share/zoneinfo/UTC /etc/localtime
     fi
 
+    echo "----------------------------------------"
     read -p "Instalar Linux Tools git, unzip, zip? (y/n): " TOOLS
+    echo "----------------------------------------"
     if [ $TOOLS = "y" ]; then
         echo "Instalando Linux Tools git, unzip, zip"
         sudo apt install -y git unzip zip build-essential libmcrypt4 mcrypt gcc openssl
     fi
 
+    echo "----------------------------------------"
     read -p "Instalar Nginx? (y/n): " NGINX
+    echo "----------------------------------------"
     if [ $NGINX = "y" ]; then
         echo "Instalando Nginx"
         sudo apt install -y nginx
@@ -48,7 +58,9 @@ if [ $CONTINUE = "y" ]; then
         sudo systemctl enable nginx
     fi
 
+    echo "----------------------------------------"
     read -p "Instalar MySQL? (y/n): " MYSQL
+    echo "----------------------------------------"
     if [ $MYSQL = "y" ]; then
         echo "Instalando MySQL"
         sudo apt install -y mysql-server mysql-client
@@ -58,7 +70,9 @@ if [ $CONTINUE = "y" ]; then
         sudo systemctl enable mysql
     fi
 
+    echo "----------------------------------------"
     read -p "Instalar PHP 7.4? (y/n): " PHP
+    echo "----------------------------------------"
     if [ $PHP = "y" ]; then
         echo "Instalando PHP 7.4"
         sudo apt-add-repository ppa:ondrej/php -y
@@ -141,13 +155,17 @@ EOF
         sudo systemctl enable php7.4-fpm
     fi
 
+    echo "----------------------------------------"
     read -p "Instalar Composer? (y/n): " COMPOSER
+    echo "----------------------------------------"
     if [ $COMPOSER = "y" ]; then
         echo "Instalando Composer"
         curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
     fi
 
+    echo "----------------------------------------"
     read -p "Instalar Memcached? (y/n): " MEMCACHED
+    echo "----------------------------------------"
     if [ $MEMCACHED = "y" ]; then
         echo "Instalando Memcached"
         sudo apt install -y memcached
@@ -156,7 +174,9 @@ EOF
         sudo systemctl enable memcached
     fi
 
+    echo "----------------------------------------"
     read -p "Instalar Redis? (y/n): " REDIS
+    echo "----------------------------------------"
     if [ $REDIS = "y" ]; then
         echo "Instalando Redis"
         sudo apt install -y redis-server
@@ -165,7 +185,9 @@ EOF
         sudo systemctl enable redis-server
     fi
 
+    echo "----------------------------------------"
     read -p "Instalar NodeJS y NPM? (y/n): " NODE
+    echo "----------------------------------------"
     if [ $NODE = "y" ]; then
         echo "Instalando NodeJS y NPM"
         sudo apt install -y nodejs
@@ -181,7 +203,9 @@ EOF
         fi
     fi
 
+    echo "----------------------------------------"
     read -p "Instalar Certbot? (y/n): " CERTBOT
+    echo "----------------------------------------"
     if [ $CERTBOT = "y" ]; then
         echo "Instalando Certbot"
         sudo add-apt-repository -y universe
@@ -190,12 +214,16 @@ EOF
         sudo apt install -y certbot python-certbot-nginx
     fi
 
+    echo "----------------------------------------"
     echo "Actualizando y limpieza final"
+    echo "----------------------------------------"
     sudo apt -y update
     sudo apt -y upgrade
     sudo apt -y dist-upgrade
     sudo apt -y autoremove
     sudo apt -y clean
 
+    echo "----------------------------------------"
     echo "Ha finalizado tu script de configuracion! :)"
+    echo "----------------------------------------"
 fi
