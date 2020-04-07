@@ -26,12 +26,12 @@ sudo ./install.sh
 
 ## config.sh
 
-Script para configuración de Nginx, directorios y certificados SSL (Let's Encrypt) para un sitio nuevo:
+Script para configuración de vhosts de Nginx y FPM, creación directorios y certificados SSL (Let's Encrypt) para un sitio nuevo de acuerdo al dominio ingresado:
 
-1. Configuración Ngnix
-2. Generación de directorios y permisos
+1. Creación de directorios
+2. Configuración Ngnix
 3. Generación de certificados SSL
-4. Nuevo proyecto Laravel o Custom
+4. Nuevo proyecto ejemplo en dominio
 
 **Ejecución:**
 

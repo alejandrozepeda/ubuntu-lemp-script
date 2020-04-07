@@ -221,9 +221,9 @@ EOF
     sudo apt -y upgrade
     sudo apt -y dist-upgrade
     sudo apt -y autoremove
-    sudo apt -y clean
+    sudo apt -y autoclean
 
     echo "----------------------------------------"
-    echo "Ha finalizado tu script de configuracion! :)"
+    echo "Ha finalizado tu script de configuración! :)"
     echo "----------------------------------------"
 fi
