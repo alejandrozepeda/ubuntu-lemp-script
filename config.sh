@@ -45,10 +45,10 @@ listen.group = www-data
 php_admin_value[disable_functions] = exec,passthru,shell_exec,system
 php_admin_flag[allow_url_fopen] = off
 pm = dynamic
-pm.max_children = 5 # The hard-limit total number of processes allowed
-pm.start_servers = 2 # When nginx starts, have this many processes waiting for requests
-pm.min_spare_servers = 1 # Number spare processes nginx will create
-pm.max_spare_servers = 3 # Number spare processes attempted to create
+pm.max_children = 5
+pm.start_servers = 2
+pm.min_spare_servers = 1
+pm.max_spare_servers = 3
 chdir = /
 EOF
         sudo systemctl restart php7.4-fpm
