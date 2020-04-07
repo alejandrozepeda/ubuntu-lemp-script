@@ -1,4 +1,4 @@
-# ubuntu-lemp-script
+# Ubuntu LEMP Script
 
 ## install.sh
 
@@ -15,7 +15,7 @@ Script para configuración de un ambiente LEMP (Linux, Nginx, MySQL, PHP) en Ubu
 9. Instalación de JS Tools (NodeJS, NPM, Gulp, Bower, Yarn, Grunt)
 10. Instalación de Certbot (Let's Encrypt)
 
-*Ejecución:*
+**Ejecución:**
 
 ```
 cd ~
@@ -24,7 +24,7 @@ chmod u+x install.sh
 sudo ./install.sh
 ```
 
-## config-site.sh
+## config.sh
 
 Script para configuración de Nginx, directorios y certificados SSL (Let's Encrypt) para un sitio nuevo:
 
@@ -32,3 +32,12 @@ Script para configuración de Nginx, directorios y certificados SSL (Let's Encry
 2. Generación de directorios y permisos
 3. Generación de certificados SSL
 4. Nuevo proyecto Laravel o Custom
+
+**Ejecución:**
+
+```
+cd ~
+wget https://raw.githubusercontent.com/alejandrozepeda/ubuntu-lemp-script/master/config.sh
+chmod u+x config.sh
+sudo ./config.sh
+```
