@@ -35,7 +35,7 @@ if [ $CONTINUE = "y" ]; then
         chmod -R 0775 /var/www/vhosts/$HOST.$DOMAIN
         touch /etc/php/7.4/fpm/pool.d/$HOST.$DOMAIN.conf
 
-        echo << EOF > /etc/php/7.4/fpm/pool.d/$HOST.$DOMAIN.conf
+        cat << EOF > /etc/php/7.4/fpm/pool.d/$HOST.$DOMAIN.conf
 [$HOST]
 user = $HOST
 group = $HOST
@@ -61,7 +61,7 @@ EOF
     if [ $NGNIXSETUP = "y" ]; then
         sudo rm /etc/nginx/sites-available/default
         sudo rm /etc/nginx/sites-enabled/default
-        echo << EOF > /etc/nginx/sites-available/$HOST.$DOMAIN
+        cat << EOF > /etc/nginx/sites-available/$HOST.$DOMAIN
 server {
     listen 80;
     server_name www.$HOST.$DOMAIN;
