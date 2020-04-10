@@ -5,7 +5,7 @@ echo "Script para configuración de un ambiente LEMP (Linux, Nginx, MySQL, PHP) 
 echo "----------------------------------------"
 
 echo "1- Linux Updates y PPAS"
-echo "2- Linux Tools (git, unzip, zip)"
+echo "2- Linux Tools (git, unzip, zip, otros)"
 echo "3- Nginx"
 echo "4- MySQL"
 echo "5- PHP 7.2"
@@ -29,19 +29,19 @@ if [ $CONTINUE = "y" ]; then
         sudo apt -y update
         sudo apt -y upgrade
         sudo apt -y dist-upgrade
-        sudo apt install -y unattended-upgrades software-properties-common
+    fi
+
+    echo "----------------------------------------"
+    read -p "Instalar Ubuntu Tools git, unzip, zip y otros? (y/n): " TOOLS
+    echo "----------------------------------------"
+    if [ $TOOLS = "y" ]; then
+        echo "Instalando Linux Tools git, unzip, zip y otros"
+        sudo apt install -y git unzip zip build-essential libmcrypt4 mcrypt gcc openssl unattended-upgrades software-properties-common sqlite3
+        echo "Configurando ajustes de seguridad automaticos y timezone"
         # Ajustes de seguridad automaticos
         sudo dpkg-reconfigure -plow unattended-upgrades
         # Timezone UTC
         sudo ln -sf /usr/share/zoneinfo/UTC /etc/localtime
-    fi
-
-    echo "----------------------------------------"
-    read -p "Instalar Linux Tools git, unzip, zip? (y/n): " TOOLS
-    echo "----------------------------------------"
-    if [ $TOOLS = "y" ]; then
-        echo "Instalando Linux Tools git, unzip, zip"
-        sudo apt install -y git unzip zip build-essential libmcrypt4 mcrypt gcc openssl
     fi
 
     echo "----------------------------------------"
@@ -50,9 +50,7 @@ if [ $CONTINUE = "y" ]; then
     if [ $NGINX = "y" ]; then
         echo "Instalando Nginx"
         sudo apt install -y nginx
-
         sed -i "s/# server_names_hash_bucket_size.*/server_names_hash_bucket_size 64;/" /etc/nginx/nginx.conf
-
         sudo systemctl restart nginx
         sudo systemctl status nginx
         sudo systemctl enable nginx
@@ -75,34 +73,12 @@ if [ $CONTINUE = "y" ]; then
     echo "----------------------------------------"
     if [ $PHP = "y" ]; then
         echo "Instalando PHP 7.4"
+        # Repositorio PHP 7.4
         sudo apt-add-repository ppa:ondrej/php -y
         sudo apt-get -y update
-
-        sudo apt install -y php7.4-fpm
-        sudo apt install -y php7.4-cli
-        sudo apt install -y php7.4-mbstring
-        sudo apt install -y php7.4-common
-        sudo apt install -y php7.4-mysql
-        sudo apt install -y php7.4-pgsql
-        sudo apt install -y php7.4-sqlite3
-        sudo apt install -y php7.4-opcache
-        sudo apt install -y php7.4-gd
-        sudo apt install -y php7.4-gmp
-        sudo apt install -y php7.4-bcmath
-        sudo apt install -y php7.4-bz2
-        sudo apt install -y php7.4-cgi
-        sudo apt install -y php7.4-json
-        sudo apt install -y php7.4-xml
-        sudo apt install -y php7.4-soap
-        sudo apt install -y php7.4-curl
-        sudo apt install -y php7.4-imap
-        sudo apt install -y php7.4-zip
-        sudo apt install -y php7.4-intl
-        sudo apt install -y php7.4-xsl
-        sudo apt install -y php7.4-readline
-        sudo apt install -y php-memcached
-        sudo apt install -y php-xdebug
-
+        # PHP modulos
+        sudo apt install -y php7.4-fpm php7.4-cli php7.4-mbstring php7.4-common php7.4-mysql php7.4-pgsql php7.4-sqlite3 php7.4-opcache php7.4-gd php7.4-gmp php7.4-bcmath php7.4-bz2 php7.4-cgi php7.4-json php7.4-xml php7.4-soap php7.4-curl php7.4-imap php7.4-zip php7.4-intl php7.4-xsl php7.4-readline php-memcached php-xdebug
+        # Default PHP version
         sudo update-alternatives --set php /usr/bin/php7.4
         php -v
 
@@ -118,6 +94,7 @@ if [ $CONTINUE = "y" ]; then
         sudo sed -i "s/;date.timezone.*/date.timezone = UTC/" /etc/php/7.4/fpm/php.ini
         sudo sed -i "s/error_log = .*/error_log = \/var\/log\/php\/php_error.log/" /etc/php/7.4/fpm/php.ini
 
+        # XDebug Ajustes
         echo "xdebug.remote_enable = 1" >> /etc/php/7.4/mods-available/xdebug.ini
         echo "xdebug.remote_connect_back = 1" >> /etc/php/7.4/mods-available/xdebug.ini
         echo "xdebug.remote_port = 9000" >> /etc/php/7.4/mods-available/xdebug.ini
@@ -149,7 +126,6 @@ fastcgi_param   SERVER_NAME         \$server_name;
 fastcgi_param   HTTPS               \$https if_not_empty;
 fastcgi_param   REDIRECT_STATUS     200;
 EOF
-
         sudo systemctl restart php7.4-fpm
         sudo systemctl status php7.4-fpm
         sudo systemctl enable php7.4-fpm

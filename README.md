@@ -5,7 +5,7 @@
 Script para configuración de un ambiente LEMP (Linux, Nginx, MySQL, PHP) en Ubuntu y diferentes tools:
 
 1. Linux Updates y PPAS
-2. Instalación de Linux Tools (git, unzip, zip)
+2. Instalación de Linux Tools (git, unzip, zip, otros)
 3. Instalación de Nginx
 4. Instalación de MySQL
 5. Instalación de PHP 7.4
