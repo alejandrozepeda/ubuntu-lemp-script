@@ -15,8 +15,8 @@ echo "----------------------------------------"
 
 if [ $CONTINUE = "y" ]; then
     echo "----------------------------------------"
-    read -p "Ingresa tu host: " HOST
-    read -p "Ingresa tu dominio: " DOMAIN
+    read -p "Ingresa tu host (puede ser subdominio): " HOST
+    read -p "Ingresa tu dominio (sin punto inicial): " DOMAIN
     echo "----------------------------------------"
 
     echo "----------------------------------------"
@@ -181,5 +181,4 @@ EOF
         echo "Generando certificado SSL"
         sudo certbot --nginx
     fi
-
 fi
