@@ -20,7 +20,7 @@ if [ $CONTINUE = "y" ]; then
     echo "----------------------------------------"
 
     echo "----------------------------------------"
-    read -p "Crear directorios y configurar FPM? (y/n): " DIRS
+    read -p "Crear directorios y configurar PHP-FPM? (y/n): " DIRS
     echo "----------------------------------------"
     if [ $DIRS = "y" ]; then
         echo "Creando directorios y configurando FPM"
