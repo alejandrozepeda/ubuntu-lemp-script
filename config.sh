@@ -82,16 +82,6 @@ server {
     server_name www.$HOST.$DOMAIN;
     return 301 \$scheme://$HOST.$DOMAIN\$request_uri;
 }
-
-server {
-    if (\$host = $HOST.$DOMAIN) {
-        return 301 https://$HOST.$DOMAIN\$request_uri;
-    }
-
-    listen 80;
-    server_name $HOST.$DOMAIN;
-    return 404;
-}
 EOF
         sudo ln -s /etc/nginx/sites-available/$HOST.$DOMAIN /etc/nginx/sites-enabled/$HOST.$DOMAIN
         sudo nginx -t
