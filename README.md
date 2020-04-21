@@ -26,12 +26,11 @@ sudo ./install.sh
 
 ## config.sh
 
-Script para configuración de vhosts de Nginx y FPM, creación directorios y certificados SSL (Let's Encrypt) para un sitio nuevo de acuerdo al dominio ingresado:
+Script para creación directorios, configuración de Nginx, y certificados SSL (Let's Encrypt) para un sitio nuevo:
 
 1. Creación de directorios
 2. Configuración Ngnix
 3. Generación de certificados SSL
-4. Nuevo proyecto ejemplo en dominio
 
 **Ejecución:**
 
@@ -40,4 +39,17 @@ cd ~
 wget https://raw.githubusercontent.com/alejandrozepeda/ubuntu-lemp-script/master/config.sh
 chmod u+x config.sh
 sudo ./config.sh
+```
+
+## laravel-config.sh
+
+Script para configuracion de permisos en un proyecto laravel:
+
+**Ejecución:**
+
+```
+cd ~
+wget https://raw.githubusercontent.com/alejandrozepeda/ubuntu-lemp-script/master/laravel-config.sh
+chmod u+x laravel-config.sh
+sudo ./laravel-config.sh
 ```
