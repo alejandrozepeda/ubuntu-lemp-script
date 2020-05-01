@@ -31,7 +31,7 @@ if [ $CONTINUE = "y" ]; then
         cd /var/www/vhosts/$HOST.$DOMAIN/web
 
         # composer
-        composer install --optimize-autoloader --no-dev
+        composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
 
         # configuraciones de laravel
         cp .env.example .env
