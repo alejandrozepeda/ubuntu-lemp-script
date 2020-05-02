@@ -46,12 +46,12 @@ if [ $CONTINUE = "y" ]; then
 
         # caches
         php artisan cache:clear
-        php artisan config:clear
-        php artisan config:cache
+        php artisan auth:clear-resets
         php artisan route:clear
         php artisan route:cache
+        php artisan config:clear
+        php artisan config:cache
         php artisan queue:restart
-        php artisan auth:clear-resets
 
         # frontend
         npm install
