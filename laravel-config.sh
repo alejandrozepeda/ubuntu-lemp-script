@@ -52,6 +52,7 @@ if [ $CONTINUE = "y" ]; then
         php artisan config:clear
         php artisan config:cache
         php artisan queue:restart
+        php artisan view:cache
 
         # frontend
         npm install
