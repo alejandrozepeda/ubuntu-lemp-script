@@ -23,7 +23,7 @@ if [ $CONTINUE = "y" ]; then
     echo "----------------------------------------"
     if [ $DIRS = "y" ]; then
         echo "Creando directorios y permisos"
-        mkdir -p /var/www/vhosts/$HOST.$DOMAIN/{web,logs,ssl}
+        mkdir -p /var/www/vhosts/$HOST.$DOMAIN/{web,logs}
         chown -R www-data:www-data /var/www/vhosts/$HOST.$DOMAIN
         chmod -R 0775 /var/www/vhosts/$HOST.$DOMAIN
         sudo systemctl restart php7.4-fpm
@@ -46,7 +46,7 @@ server {
     add_header X-XSS-Protection "1; mode=block";
     add_header X-Content-Type-Options "nosniff";
 
-    index index.php index.html index.htm;
+    index index.php;
 
     charset utf-8;
 
@@ -57,17 +57,15 @@ server {
     location = /robots.txt { access_log off; log_not_found off; }
     location = /favicon.ico { access_log off; log_not_found off; }
     location = /humans.txt { access_log off; log_not_found off; }
-    location ~ /\. { deny all; access_log off; log_not_found off; }
-    location ~ \.(neon|ini|log|yml|env|sql)$ { deny all; access_log off; log_not_found off; }
 
     error_page 404 /index.php;
     error_page 500 502 503 504 /custom_50x.html;
+    
     access_log /var/www/vhosts/$HOST.$DOMAIN/logs/access.log;
     error_log /var/www/vhosts/$HOST.$DOMAIN/logs/error.log error;
 
     location ~ \.php$ {
         fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
-        fastcgi_index index.php;
         fastcgi_param SCRIPT_FILENAME \$realpath_root\$fastcgi_script_name;
         include fastcgi_params;
     }
