@@ -60,13 +60,13 @@ server {
 
     error_page 404 /index.php;
     error_page 500 502 503 504 /custom_50x.html;
-    
+
     access_log /var/www/vhosts/$HOST.$DOMAIN/logs/access.log;
     error_log /var/www/vhosts/$HOST.$DOMAIN/logs/error.log error;
 
     location ~ \.php$ {
         fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
-        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        fastcgi_param SCRIPT_FILENAME \$realpath_root\$fastcgi_script_name;
         include fastcgi_params;
     }
 
